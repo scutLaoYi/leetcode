@@ -15,12 +15,8 @@ class Solution {
 
             for (int day = 1; day != days; ++day)
             {
-                dp[day][1] = dp[day-1][1];
-                dp[day][0] = dp[day-1][0];
-                for (int d = 0; d != day; ++d) {
-                    dp[day][1] = max(dp[day][1], dp[d][0] - prices[day]);
-                    dp[day][0] = max(dp[day][0], dp[d][1] + prices[day]);
-                }
+                dp[day][1] = max(dp[day-1][1], dp[day-1][0] - prices[day]);
+                dp[day][0] = max(dp[day-1][0], dp[day-1][1] + prices[day]);
             }
 
             return dp[days-1][0];
